@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import axios from "../api/axios";
 import requests from "../api/request";
+import "./Banner.css";
 
 function Banner(props) {
     const [movie, setMovie] = useState([]);
     useEffect(() => {
       fetchData();
     }, []);
+    const truncate =(str, n) =>{
+        return str?.length > n ? str.substring(0,n)+"...": str;
+    }
     const fetchData = async () =>{
         /*현재 상영중인 영화정보 가지고 오기*/
         const request =await axios.get(requests.fetchNowPlaying);
@@ -26,7 +30,7 @@ function Banner(props) {
                     backgroundPosition: "top center",
                     backgroundSize: "cover"
                 }}>
-            <div className="banner__contens">
+            <div className="banner__contents">
                 <h1>
                     {movie.title || movie.name || movie.original_name}
                 </h1>
@@ -34,7 +38,8 @@ function Banner(props) {
                     <button className="banner__button play">Play</button>
                     <button className="banner__button info">More Information</button>
                 </div>
-                <h1 className="banner_description">{movie.overview}</h1>
+                <h1 className="banner__description">{truncate(movie.overview, 100)}</h1>
+                <div className="banner--fadeBottom"/>
             </div>
 
 
