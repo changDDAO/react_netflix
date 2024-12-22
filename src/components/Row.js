@@ -10,15 +10,16 @@ function Row({title, id, isLargeRow,fetchUrl}) {
 
     const fetchMovieData = async()=> {
         const request = await axios.get(fetchUrl);
-        console.log('request',request);
         setMovies(request.data.results);
     }
     return (
         <section className="row">
-            <h2>${title}</h2>
+            <h2>{title}</h2>
             <div className="slider">
                 <div className="slider__arrow-left">
-                    <span className="arrow">
+                    <span className="arrow" onClick={()=>{
+                        document.getElementById(id).scrollLeft -= window.innerWidth -80;
+                    }}>
                         {"<"}
                     </span>
                 </div>
@@ -33,7 +34,10 @@ function Row({title, id, isLargeRow,fetchUrl}) {
                         )
                     }
                 </div>
-                <div className="slider__arrow-right">
+                <div className="slider__arrow-right"
+                onClick={()=>{
+                    document.getElementById(id).scrollLeft += window.innerWidth +80
+                }}>
                     <span className="arrow">{">"}</span>
                 </div>
             </div>
