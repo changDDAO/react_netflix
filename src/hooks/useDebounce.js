@@ -9,7 +9,7 @@ export const useDebounce = (value, delay) =>{
             setDebounceValue(value);
         },delay);
         return () => {
-            /*delay 시간을 초과하지않고 미만일 때, 값을 입력받으면 타이머 초기화*/
+            /*value나 delay 변경 시 타이머 초기화*/
             clearTimeout(handler);
         }
     }, [value, delay]);
